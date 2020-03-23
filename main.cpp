@@ -20,9 +20,9 @@ Test::Test(int i)
 
 int main()
 {
-    SmartPointer<Test> *sp1 = new SmartPointer<Test>(); // 在创建对象后（void* operator new(unsigned int size) ），再调用类的构造函数
+    SmartPointer<Test> *sp1 = new SmartPointer<Test>(); // 在创建好的内存空间上（void* operator new(unsigned int size) ），调用类的构造函数并创建对象
 
-    delete sp1; // 在销毁对象前(void operator delete(unsigned int size) )，会调用类的析构函数
+    delete sp1; // 在析构函数中，销毁资源(void operator delete(unsigned int size) )
 
     // 通过宏替换可提高代码的移植性，比如这样注释，宏代码相当于没有调用
     // #define THROW_EXCEPTION(eType, eInfo) //注释掉...(throw eType(eInfo, __FILE__, __LINE__))
