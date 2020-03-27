@@ -1,34 +1,55 @@
 #include <iostream>
-#include <SmartPointer.hpp>
-#include <Exception.h>
-#include <Object.h>
+#include "Object.h"
+#include "SmartPointer.hpp"
+#include "Exception.h"
+#include "List.hpp"
+#include "SeqList.hpp"
+#include "StaticList.hpp"
+#include "DynamicList.hpp"
+#include "StaticArray.hpp"
+#include "DynamicArray.hpp"
+#include "LinkList.hpp"
 
 using namespace std;
 using namespace SLIB;
 
-class Test : public Object
-{
-public:
-    int i;
-    Test(int i = 0);
-};
-
-Test::Test(int i)
-{
-    this->i = i;
-}
 
 int main()
 {
-    SmartPointer<Test> *sp1 = new SmartPointer<Test>(); // 在创建对象后（void* operator new(unsigned int size) ），再调用类的构造函数
+   LinkList<int> sa;
 
-    delete sp1; // 在销毁对象前(void operator delete(unsigned int size) )，会调用类的析构函数
+   for(int i = 0; i < 5; i++)
+   {
+       sa.insert(i, 10+i);
+   }
 
-    // 通过宏替换可提高代码的移植性，比如这样注释，宏代码相当于没有调用
-    // #define THROW_EXCEPTION(eType, eInfo) //注释掉...(throw eType(eInfo, __FILE__, __LINE__))
-    //THROW_EXCEPTION(InvalidParameterException, "it will throw an exception...");
+   for(int i = 0; i < sa.length(); i++)
+   {
+       cout << sa.get(i) << "  ";
+   }
 
-    cout << "main() end " << endl;
+   cout << endl;
+
+   sa.insert(3, 100);
+
+   for(int i = 0; i < sa.length(); i++)
+   {
+       cout << sa.get(i) << "  ";
+   }
+   cout << endl;
+
+   sa.remove(3);
+   sa.clear();
+   for(int i = 0; i < 5; i++)
+   {
+       sa.insert(0, 100+i);
+   }
+
+   for(int i = 0; i < sa.length(); i++)
+   {
+       cout << sa.get(i) << "  ";
+   }
+    cout << endl;
 
     return 0;
 }

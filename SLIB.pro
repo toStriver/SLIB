@@ -11,4 +11,12 @@ SOURCES += \
 HEADERS += \
     Exception.h \
     Object.h \
-    SmartPointer.hpp
+    SmartPointer.hpp \
+    List.hpp \
+    SeqList.hpp \
+    DynamicList.hpp \
+    StaticList.hpp \
+    Array.hpp \
+    StaticArray.hpp \
+    DynamicArray.hpp \
+    LinkList.hpp
